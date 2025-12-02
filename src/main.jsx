@@ -5,6 +5,8 @@ import './index.css'
 import App from './Pages/App.jsx'
 import LandingPage from './Pages/LandingPage.jsx'
 import Sobre from './Pages/Sobre.jsx'
+import Login from './Pages/Login.jsx'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -12,6 +14,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/sobre" element={<Sobre/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
     {/*<App />*/}

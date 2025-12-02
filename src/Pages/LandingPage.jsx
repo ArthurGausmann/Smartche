@@ -6,6 +6,7 @@ function LandingPage () {
     <>
         <Header/>
         <Link to="/sobre">Sobre</Link>
+        <Link to="/login">Login</Link>
     </>
     )
 }
