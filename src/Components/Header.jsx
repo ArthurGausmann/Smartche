@@ -3,7 +3,6 @@ function Header() {
     return (
     <>
         <h1>Smartchê</h1>
-        
     </>
     )
 }

@@ -7,6 +7,7 @@ function LandingPage () {
         <Header/>
         <Link to="/sobre">Sobre</Link>
         <Link to="/login">Login</Link>
+        <button className="btn btn-primary">Test Button</button>
     </>
     )
 }
