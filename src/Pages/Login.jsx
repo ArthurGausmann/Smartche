@@ -6,8 +6,8 @@ function Login() {
     <>
         <Header/>
         <div className="login">
-            <input type="text" name="" id="email" placeholder="Email"/>
-            <input type="password" name="" id="senha" placeholder="Senha"/>
+            <input className="input" type="text" name="" id="email" placeholder="Email"/>
+            <input className="input" type="password" name="" id="senha" placeholder="Senha"/>
             <button className="btn-entrar">Entrar</button>
             <Link to="/cadastro"><button className="btn-cadastrar">Cadastrar</button></Link>
         </div>
