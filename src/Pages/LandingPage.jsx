@@ -1,7 +1,10 @@
 import Header from "../Components/Header";
 import { Outlet, Link } from 'react-router-dom'
+import dashboardExemplo from "../assets/dashboard_armadilha.png";
 
 function LandingPage () {
+    
+
     return (
     <>
         <Header/>
@@ -16,7 +19,7 @@ function LandingPage () {
                     </p>
                     <Link to="/sobre"><button className="btn btn-primary btn-lg px-7">Sobre</button></Link>
                 </div>
-                <img src="../assets/dashboard_armadilha.png" className="max-w-sm rounded-lg shadow-2xl" />
+                <img src={dashboardExemplo} className="max-w-xl rounded-sm shadow-2xl" />
             </div>
         </div>
     </>
