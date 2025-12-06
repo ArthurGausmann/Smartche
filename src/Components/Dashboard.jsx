@@ -1,9 +1,7 @@
-/*Dashboard padrão, vai receber os dados do Things Board (armadilha de pragas, irrigação de arroz, etc) */
-
 function Dashboard() {
     return (
     <>
-        
+        <h1>Dashboard</h1>
     </>
     )
 }

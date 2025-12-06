@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 function Header() {
     const location = useLocation()
 
-    const hideLoginBtn = ['/login', '/cadastro', '/login/dashboard', '/login/usuarios'].includes(location.pathname);
+    const hideLoginBtn = location.pathname === '/cadastro' || location.pathname.startsWith('/login');
 
     return (
     <>
@@ -13,7 +13,7 @@ function Header() {
             <Link to='/'><h1 className='text-3xl'>Smartchê</h1></Link>
         </div>
         <div className="navbar-end">
-            {!hideLoginBtn && (<Link to="/login"><button className="btn mr-10">Login</button></Link>)}
+            {!hideLoginBtn && (<Link to="/login"><button className="btn mr-2 lg:mr-10">Login</button></Link>)}
         </div>
     </div>
     </>

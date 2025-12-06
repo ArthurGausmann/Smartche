@@ -18,8 +18,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login/>}/>
         <Route path="/cadastro" element={<Cadastro/>}/>
         <Route path="/login/dashboard" element={<DashboardPage/>}/>
+        <Route path="/login/usuarios" element={<DashboardPage/>}/>
       </Routes>
     </BrowserRouter>
-    {/*<App />*/}
   </StrictMode>,
 )
