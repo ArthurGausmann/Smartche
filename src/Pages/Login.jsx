@@ -21,7 +21,7 @@ function Login() {
                             <input className="input pr-28" type="password" name="" id="senha" placeholder="Senha" required />
                         </div>
                         <div className="form-control">
-                            <button className="btn btn-outline btn-primary mx-2">Entrar</button>
+                            <Link to="/login/dashboard"><button className="btn btn-outline btn-primary mx-2">Entrar</button></Link>
                         </div>
                         <div className="form-control">
                             <Link to="/cadastro"><button className="btn btn-outline btn-primary mx-2">Cadastrar</button></Link>
