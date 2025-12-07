@@ -1,5 +1,5 @@
 import Header from "../Components/Header";
-import { Outlet, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import dashboardExemplo from "../assets/dashboard_armadilha.png";
 
 function LandingPage () {

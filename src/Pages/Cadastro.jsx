@@ -7,7 +7,7 @@ function Cadastro() {
     <Header/>
     <div className="min-h-screen bg-base-200">
         <div className="flex items-center justify-center">
-            <div className="mt-48 card bg-base-100 w-md shadow-sm">
+            <div className="mt-40 card bg-base-100 w-sm lg:w-lg shadow-sm">
                 <div className="card-title mt-2 ml-2">
                     <Link to='/login'><button className="btn">Voltar</button></Link>
                 </div>

@@ -7,7 +7,7 @@ function Sobre() {
     <Header />
     <div className="min-h-screen bg-base-200">
         <div className="flex items-center justify-center">
-            <div className="mt-48 card bg-base-100 w-full max-w-3xl shadow-md">
+            <div className="mt-40 card bg-base-100 lg:w-full max-w-3xl shadow-md">
                 <div className="card-body">
                     <div className="card-title">
                         <Link to='/'><button className="btn">Voltar</button></Link>
