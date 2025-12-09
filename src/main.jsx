@@ -7,6 +7,7 @@ import Sobre from './Pages/Sobre.jsx'
 import Login from './Pages/Login.jsx'
 import Cadastro from './Pages/Cadastro.jsx'
 import DashboardPage from './Pages/DashboardPage.jsx'
+import Servicos from './Pages/Servicos.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/sobre" element={<Sobre/>}/>
+        <Route path="/servicos" element={<Servicos/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/cadastro" element={<Cadastro/>}/>
         <Route path="/login/dashboard" element={<DashboardPage/>}/>
