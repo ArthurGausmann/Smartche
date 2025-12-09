@@ -18,9 +18,9 @@ function LandingPage () {
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
                         quasi. In deleniti eaque aut repudiandae et a id nisi.
                     </p>
-                    <div className="border-2">
-                        <Link to="/sobre"><button className="btn btn-primary btn-lg px-7 mx-5">Sobre</button></Link>
-                        <Link to="/servicos"><button className="btn btn-primary btn-lg px-7 mx-5">Serviços</button></Link>                        
+                    <div className="flex justify-center space-x-8">
+                        <Link to="/sobre"><button className="btn btn-primary btn-lg px-7">Sobre</button></Link>
+                        <Link to="/servicos"><button className="btn btn-primary btn-lg px-7">Serviços</button></Link>                        
                     </div>
                 </div>
                 <div>

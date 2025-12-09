@@ -1,5 +1,5 @@
 import Header from "../Components/Header"
-import Sidebar from "../Components/Sidebar"
+import Sidebar from "../Components/Navbar"
 import { Link } from 'react-router-dom'
 
 function DashboardPage() {
@@ -7,7 +7,6 @@ function DashboardPage() {
     <>
     <Header/>
     <Sidebar/>
-    <Link to='/'><button className="btn">Voltar</button></Link>
     </>
     )
 }

@@ -1,5 +1,6 @@
 import Header from '../Components/Header'
 import dashboardExemplo from "../assets/dashboard_armadilha.png";
+import { Link } from 'react-router-dom'
 
 
 function Servicos() {
@@ -7,6 +8,7 @@ function Servicos() {
     <>
     <Header/>
     <div className="min-h-screen bg-base-200">
+        <Link to='/'><button className="btn btn-active m-2 lg:hidden">Voltar</button></Link>
         <div className="hero bg-base-200 min-h-auto">
             <div className="hero-content flex-col lg:flex-row my-10 lg:my-20">
                 <img
