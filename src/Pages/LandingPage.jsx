@@ -1,6 +1,7 @@
-import Header from "../Components/Header";
+import Header from "../Components/Header"
+import Footer from "../Components/Footer"
 import { Link } from 'react-router-dom'
-import dashboardExemplo from "../assets/dashboard_armadilha.png";
+import dashboardExemplo from "../assets/dashboard_armadilha.png"
 import bgFarm from "../assets/farm-view-bg.jpg"
 
 function LandingPage () {
@@ -30,6 +31,7 @@ function LandingPage () {
             </div>
         </div>
     </div>
+    <Footer />
     </>
     )
 }
