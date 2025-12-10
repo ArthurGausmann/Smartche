@@ -1,4 +1,5 @@
-import { useState} from 'react'
+import { useState } from 'react'
+import ModalAddUser from '../Components/ModalAddUser'
 
 function Usuarios() {
     return (
@@ -9,29 +10,7 @@ function Usuarios() {
             <div className="card-body">
                 <div className="card-title">
                     <h1>Armadilha de pragas</h1>
-                    <button className="btn btn-primary ml-auto" onClick={()=>document.getElementById('modalAdd').showModal()}>Adicionar</button>
-                    <dialog id="modalAdd" className="modal modal-bottom sm:modal-middle">
-                        <div className="modal-box">
-                            <h3 className="font-bold text-lg mb-2">Cadastrar novo usuário</h3>
-
-                            <form onSubmit={''}>
-                                <div className='space-y-4'>
-                                    <div className='form-control'>
-                                        <input type="text" name="nome" id="" placeholder='Nome' className="input input-bordered w-full" />
-                                    </div>
-                                    <div className='form-control'>
-                                        <input type="email" name="email" id="" placeholder='Email' className="input input-bordered w-full" />
-                                    </div>
-
-                                </div>
-                            </form>
-
-                            <div className="modal-action">
-                                <button type='button' className='btn btn-warning' onClick={''}>Cancelar</button>
-                                <button type='submit' className='btn btn-primary' onClick={''}>Cadastrar</button>
-                            </div>
-                        </div>
-                    </dialog>
+                    <ModalAddUser />
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -67,19 +46,7 @@ function Usuarios() {
             <div className="card-body">
                 <div className="card-title">
                     <h1>Irrigação de arroz</h1>
-                    <button className="btn btn-primary ml-auto" onClick={()=>document.getElementById('modalAdd').showModal()}>Adicionar</button>
-                    <dialog id="modalAdd" className="modal modal-bottom sm:modal-middle">
-                        <div className="modal-box">
-                            <h3 className="font-bold text-lg">Cadastrar novo usuário</h3>
-                            <p className="py-4">Press ESC key or click the button below to close</p>
-                            <div className="modal-action">
-                                <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn">Fechar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </dialog>
+                    <ModalAddUser />
                 </div>
                 
                 <div className="overflow-x-auto">
