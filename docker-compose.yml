@@ -1,0 +1,18 @@
+services:
+  smartche:
+    build: .
+
+    container_name: smartche
+
+    restart: always
+
+    environment:
+      - VIRTUAL_HOST=url.com # Substituir por url correta
+      - LETSENCRYPT_HOST=url.com # Substituir por url correta
+
+    networks:
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external: true
