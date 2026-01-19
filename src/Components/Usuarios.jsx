@@ -2,83 +2,56 @@ import { useState } from 'react'
 import ModalAddUser from '../Components/ModalAddUser'
 
 function Usuarios() {
+    const [usuarios, setUsuarios] = useState([])
+
+    const handleCadastro = (novoUsuario) => {
+        const novoId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
+
+        const usuario = {
+            ...novoUsuario,
+            id: novoId
+        };
+
+        setUsuarios([...usuarios, usuario]);
+        alert(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`)
+    }
+
     return (
     <>
-    <h1 className="text-2xl font-bold ml-2 mb-4">Gerenciar os usuários</h1>
-    <div className="flex w-full flex-col lg:flex-row">
-        <div className="card bg-base-300 rounded-box grid h-auto grow">
-            <div className="card-body">
-                <div className="card-title">
-                    <h1>Armadilha de pragas</h1>
-                    <ModalAddUser />
-                </div>
+        <div className='flex justify-between itens-center mb-6'>
+            <h1 className="text-2xl font-bold ml-2 mb-4">Gerenciar os usuários</h1>
+            <ModalAddUser onCadastro={handleCadastro}/>
+        </div>
+
+        <div className="card bg-base-300 rounded-box">
+            <div className="card-body p-0">
                 <div className="overflow-x-auto">
                     <table className="table">
                         <thead>
                         <tr>
-                            <th></th>
                             <th>Nome</th>
+                            <th>Acesso</th>
+                            <th>Configurações</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td><button>Config</button></td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td><button>Config</button></td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td><button>Config</button></td>
-                        </tr>
+                        <tbody> 
+                            {usuarios.length === 0 ? (
+                                <tr>
+                                    <td colSpan="3" className="text-center py-8 text-base-content/70">Nenhum usuário cadastrado</td>
+                                </tr>
+                            )
+                            : usuarios.map((usuario) => (
+                                <tr key={usuario.id}>
+                                    <td>{usuario.nome}</td> 
+                                    <td><span>{usuario.acesso}</span></td>
+                                    <td><button className="btn btn-sm btn-outline hover:bg-base-200">Config</button></td>
+                                </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div className="divider divider-horizontal"></div>
-        <div className="card bg-base-300 rounded-box grid h-auto grow">
-            <div className="card-body">
-                <div className="card-title">
-                    <h1>Irrigação de arroz</h1>
-                    <ModalAddUser />
-                </div>
-                
-                <div className="overflow-x-auto">
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Nome</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td><button>Config</button></td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td><button>Config</button></td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td><button>Config</button></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
     </>
     )
 }

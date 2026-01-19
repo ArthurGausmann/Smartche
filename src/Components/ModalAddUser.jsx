@@ -1,7 +1,11 @@
 import { useState } from 'react'
 
 function ModalAddUser({ onCadastro }) {
-    const [formUser, setFormUser] = useState({nome:'', email:''});
+    const [formUser, setFormUser] = useState({
+        nome:'',
+        email:'',
+        acesso: 'Armadilha de Pragas'
+    });
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -11,7 +15,11 @@ function ModalAddUser({ onCadastro }) {
 
     const handleClose = () => {
         setIsOpen(false);
-        setFormUser({nome:'', email:''});
+        setFormUser({
+            nome:'',
+            email:'',
+            acesso: 'Armadilha de Pragas'
+        });;
     }
 
     const handleChange = (e) => {
@@ -21,9 +29,9 @@ function ModalAddUser({ onCadastro }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formUser.nome.trim() || !formUser.email.trim()) {
+        if (!formUser.nome.trim() || !formUser.email.trim() || !formUser.acesso.trim()) {
             alert('Por favor, preencha todos os campos!');
-        return;
+            return;
         }
 
         console.log("Novo usuário: ", formUser);
@@ -55,6 +63,14 @@ function ModalAddUser({ onCadastro }) {
                     <div className="form-control">
                         <input type="email" name="email" placeholder="Email" className="input input-bordered w-full" 
                         value={formUser.email} onChange={handleChange} required/>
+                    </div>
+                    <div className='form-control'>
+                        <select name="acesso" className='select select-bordered w-full' 
+                        value={formUser.acesso} onChange={handleChange} required>
+                            <option value="" disabled>Selecione o tipo de acesso</option>
+                            <option value="Armadilha de Pragas">Armadilha de Pragas</option>
+                            <option value="Irrigação de Arroz">Irrigação de Arroz</option>
+                        </select>
                     </div>
                 </div>
 
