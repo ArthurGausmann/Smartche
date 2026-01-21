@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import ModalAddUser from '../Components/ModalAddUser'
+import ModalUserConfig from './ModalUserConfig'
 
 function Usuarios() {
     const [usuarios, setUsuarios] = useState([])
+    const [usuarioEditando, setUsuarioEditando] = useState(null)
+    const [modalAberto, setModalAberto] = useState(false)
 
+    // Adicionar usuário
     const handleCadastro = (novoUsuario) => {
         const novoId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
 
@@ -13,7 +17,49 @@ function Usuarios() {
         };
 
         setUsuarios([...usuarios, usuario]);
-        alert(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`)
+        console.log('Adicionado usuário:', novoId);
+    }
+
+    // Função para abrir o modal de configurações
+    const handleAbrirConfig = (usuario) => {
+        setUsuarioEditando(usuario)
+        setModalAberto(true)
+    }
+
+    // Função para fechar o modal
+    const handleFecharModal = () => {
+        setModalAberto(false)
+        setUsuarioEditando(null)
+    }
+
+    // Função para editar um usuário
+    const handleEditarUsuario = (id, novosDados) => {
+        console.log('Editando usuário:', id);
+
+        console.log('Recebendo edição:', {
+            id,
+            novosDados,
+            usuariosAntes: prevUsuarios,
+            usuariosDepois: prevUsuarios.map(usuario => 
+                usuario.id === id ? { ...usuario, ...novosDados } : usuario
+            )
+        });
+
+        setUsuarios(prevUsuarios => 
+            prevUsuarios.map(usuario => 
+                usuario.id === id ? { ...usuario, ...novosDados } : usuario
+            )
+        )
+    }
+
+    // Função para excluir um usuário
+    const handleExcluirUsuario = (id) => {
+        console.log('Excluindo usuário:', id);
+        
+        // Remove o usuário da lista
+        setUsuarios(prevUsuarios => 
+            prevUsuarios.filter(usuario => usuario.id !== id)
+        )
     }
 
     return (
@@ -44,7 +90,7 @@ function Usuarios() {
                                 <tr key={usuario.id}>
                                     <td>{usuario.nome}</td> 
                                     <td><span>{usuario.acesso}</span></td>
-                                    <td><button className="btn btn-sm btn-outline hover:bg-base-200">Config</button></td>
+                                    <td><button className="btn btn-sm btn-outline hover:bg-base-200" onClick={handleAbrirConfig}>Config</button></td>
                                 </tr>
                         ))}
                         </tbody>
@@ -52,6 +98,9 @@ function Usuarios() {
                 </div>
             </div>
         </div>
+        {modalAberto && usuarioEditando && (
+                <ModalUserConfig usuario={usuarioEditando} onEditar={handleEditarUsuario} onExcluir={handleExcluirUsuario} onClose={handleFecharModal}/>
+        )}
     </>
     )
 }
