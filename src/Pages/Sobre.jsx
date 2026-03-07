@@ -10,7 +10,7 @@ function Sobre() {
             <div className="mt-40 card bg-base-100 lg:w-full max-w-3xl shadow-md">
                 <div className="card-body">
                     <div className="card-title">
-                        <Link to='/'><button className="btn">Voltar</button></Link>
+                        <Link to='/'><button className="btn btn-outline">Voltar</button></Link>
                     </div>
                     <div className="my-3">
                         <h2 className="card-title text-2xl mb-2">Sobre nós</h2>
