@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ModalAddUser from '../Components/ModalAddUser'
 import ModalUserConfig from './ModalUserConfig'
 
-function Usuarios() {
+export default function Usuarios() {
     const [usuarios, setUsuarios] = useState([])
     const [usuarioEditando, setUsuarioEditando] = useState(null)
     const [modalAberto, setModalAberto] = useState(false)
@@ -12,12 +12,20 @@ function Usuarios() {
         const novoId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
 
         const usuario = {
-            ...novoUsuario,
-            id: novoId
+            id: novoId,
+            name: novoUsuario.name,
+            email: novoUsuario.email,
+            password_hash: "mock",
+            platform_role: novoUsuario.platform_role,
+            is_active: true,
+            tenant: {
+                tenant_id: 1,
+                tenant_role: novoUsuario.tenant_role
+            }
         };
 
-        setUsuarios([...usuarios, usuario]);
-        console.log('Adicionado usuário:', novoId);
+        setUsuarios(prev => [...prev, usuario])
+        console.log('Adicionado usuário: ', novoId);
     }
 
     // Função para abrir o modal de configurações
@@ -35,27 +43,18 @@ function Usuarios() {
     // Função para editar um usuário
     const handleEditarUsuario = (id, novosDados) => {
         console.log('Editando usuário:', id);
-
-        console.log('Recebendo edição:', {
-            id,
-            novosDados,
-            usuariosAntes: prevUsuarios,
-            usuariosDepois: prevUsuarios.map(usuario => 
-                usuario.id === id ? { ...usuario, ...novosDados } : usuario
+        setUsuarios(prevUsuarios => {
+            const atualizados = prevUsuarios.map(usuario =>
+                usuario.id === id ? novosDados : usuario
             )
-        });
-
-        setUsuarios(prevUsuarios => 
-            prevUsuarios.map(usuario => 
-                usuario.id === id ? { ...usuario, ...novosDados } : usuario
-            )
-        )
+            console.log("Usuarios atualizados:", atualizados)
+            return atualizados
+        })
     }
 
     // Função para excluir um usuário
     const handleExcluirUsuario = (id) => {
         console.log('Excluindo usuário:', id);
-        
         // Remove o usuário da lista
         setUsuarios(prevUsuarios => 
             prevUsuarios.filter(usuario => usuario.id !== id)
@@ -76,21 +75,27 @@ function Usuarios() {
                         <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Acesso</th>
+                            <th>Email</th>
+                            <th>Função</th>
+                            <th>Tipo</th>
+                            <th>Status</th>
                             <th>Configurações</th>
                         </tr>
                         </thead>
                         <tbody> 
                             {usuarios.length === 0 ? (
                                 <tr>
-                                    <td colSpan="3" className="text-center py-8 text-base-content/70">Nenhum usuário cadastrado</td>
+                                    <td colSpan="6" className="text-center py-8 text-base-content/70">Nenhum usuário cadastrado</td>
                                 </tr>
                             )
                             : usuarios.map((usuario) => (
                                 <tr key={usuario.id}>
-                                    <td>{usuario.nome}</td> 
-                                    <td><span>{usuario.acesso}</span></td>
-                                    <td><button className="btn btn-sm btn-outline hover:bg-base-200" onClick={handleAbrirConfig}>Config</button></td>
+                                    <td>{usuario.name}</td>
+                                    <td>{usuario.email}</td>
+                                    <td>{usuario.platform_role}</td>
+                                    <td>{usuario.tenant.tenant_role}</td>
+                                    <td>{usuario.is_active ? "Ativo" : "Inativo"}</td>
+                                    <td><button className="btn btn-sm btn-outline hover:bg-base-200" onClick={() => handleAbrirConfig(usuario)}>Config</button></td>
                                 </tr>
                         ))}
                         </tbody>
@@ -104,5 +109,3 @@ function Usuarios() {
     </>
     )
 }
-
-export default Usuarios

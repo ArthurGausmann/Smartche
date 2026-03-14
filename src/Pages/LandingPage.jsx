@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import dashboardExemplo from "../assets/dashboard_armadilha.png"
 import bgFarm from "../assets/farm-view-bg.jpg"
 
-function LandingPage () {
+export default function LandingPage () {
     return (
     <>
     <Header/>
@@ -38,5 +38,3 @@ function LandingPage () {
     </>
     )
 }
-
-export default LandingPage

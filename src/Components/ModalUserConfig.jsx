@@ -1,24 +1,30 @@
 import { useState } from 'react'
 
-function ModalUserConfig({ usuario, onEditar, onExcluir, onClose }) {
-    const [novoAcesso, setNovoAcesso] = useState(usuario.acesso)
+export default function ModalUserConfig({ usuario, onEditar, onExcluir, onClose }) {
+    const [novoPlatformRole, setNovoPlatformRole] = useState(usuario.platform_role)
+    const [novoTenantRole, setNovoTenantRole] = useState(usuario?.tenant?.tenant_role || "USER")
+    const [novoStatus, setNovoStatus] = useState(usuario.is_active)
+    
     const [excluirConfirmado, setExcluirConfirmado] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
-        console.log('Enviando alterações:', {
-            id: usuario.id,
-            novoAcesso: novoAcesso,
-            usuarioOriginal: usuario
-        });
 
         if (usuario?.id && onEditar) {
-            onEditar(usuario.id, { ...usuario, acesso: novoAcesso })
-        } else {
-            console.error('ID do usuário não encontrado ou onEditar não definido');
-        }
+            const usuarioAtualizado = {
+                ...usuario,
+                platform_role: novoPlatformRole,
+                is_active: novoStatus,
+                tenant: {
+                    ...(usuario.tenant || {}),
+                    tenant_role: novoTenantRole
+                }
+            }
 
+            onEditar(usuario.id, usuarioAtualizado)
+        } else {
+            console.error("ID do usuário não encontrado ou onEditar não definido")
+        }
         onClose()
     }
 
@@ -49,7 +55,7 @@ function ModalUserConfig({ usuario, onEditar, onExcluir, onClose }) {
                             <label className="label">
                                 <span className="label-text">Nome</span>
                             </label>
-                            <input type="text" className="input input-bordered w-full bg-base-200" value={usuario.nome || ''} disabled />
+                            <input type="text" className="input input-bordered w-full bg-base-200" value={usuario.name || ''} disabled />
                         </div>
                         
                         <div className="form-control">
@@ -61,11 +67,31 @@ function ModalUserConfig({ usuario, onEditar, onExcluir, onClose }) {
                         
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Acesso</span>
+                                <span className="label-text">Função</span>
                             </label>
-                            <select className="select select-bordered w-full" value={novoAcesso}onChange={(e) => setNovoAcesso(e.target.value)} >
-                                <option value="Armadilha de Pragas">Armadilha de Pragas</option>
-                                <option value="Irrigação de Arroz">Irrigação de Arroz</option>
+                            <select className="select select-bordered w-full" value={novoPlatformRole} onChange={(e) => setNovoPlatformRole(e.target.value)} >
+                                <option value="STANDARD">Padrão</option>
+                                <option value="ADMIN">Administrador</option>
+                            </select>
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Tipo</span>
+                            </label>
+                            <select className="select select-bordered w-full" value={novoTenantRole} onChange={(e) => setNovoTenantRole(e.target.value)} >
+                                <option value="USER">Usuário</option>
+                                <option value="MANAGER">Gerente</option>
+                            </select>
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Status</span>
+                            </label>
+                            <select className="select select-bordered w-full" value={novoStatus} onChange={(e) => setNovoStatus(e.target.value === "true")} >
+                                <option value="true">Ativo</option>
+                                <option value="false">Inativo</option>
                             </select>
                         </div>
                     </div>
@@ -86,7 +112,12 @@ function ModalUserConfig({ usuario, onEditar, onExcluir, onClose }) {
 
                         <div className="flex gap-3">
                             <button type="button" className="btn btn-outline" onClick={onClose}>Cancelar</button>
-                            <button type="submit" className="btn btn-primary" disabled={novoAcesso === usuario.acesso}>Salvar Alterações</button>
+                            <button type="submit" className="btn btn-primary" disabled={
+                                novoPlatformRole === usuario.platform_role && 
+                                novoTenantRole === usuario?.tenant?.tenant_role && 
+                                novoStatus === usuario.is_active}>
+                                    Salvar Alterações
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -96,5 +127,3 @@ function ModalUserConfig({ usuario, onEditar, onExcluir, onClose }) {
         </div>
     )
 }
-
-export default ModalUserConfig

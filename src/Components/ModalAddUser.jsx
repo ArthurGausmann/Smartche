@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-function ModalAddUser({ onCadastro }) {
+export default function ModalAddUser({ onCadastro }) {
     const [formUser, setFormUser] = useState({
-        nome:'',
+        name:'',
         email:'',
-        acesso: 'Armadilha de Pragas'
+        platform_role: 'STANDARD',
+        tenant_role: 'USER',
     });
-
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = () => {
@@ -18,7 +18,8 @@ function ModalAddUser({ onCadastro }) {
         setFormUser({
             nome:'',
             email:'',
-            acesso: 'Armadilha de Pragas'
+            platform_role: 'STANDARD',
+            tenant_role: 'USER',
         });;
     }
 
@@ -29,7 +30,7 @@ function ModalAddUser({ onCadastro }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formUser.nome.trim() || !formUser.email.trim() || !formUser.acesso.trim()) {
+        if (!formUser.name.trim() || !formUser.email.trim() || !formUser.platform_role.trim() || !formUser.tenant_role.trim()) {
             alert('Por favor, preencha todos os campos!');
             return;
         }
@@ -57,7 +58,7 @@ function ModalAddUser({ onCadastro }) {
             <form onSubmit={handleSubmit}>
                 <div className="space-y-4 mb-6">
                     <div className="form-control">
-                        <input type="text" name="nome" placeholder="Nome" className="input input-bordered w-full"
+                        <input type="text" name="name" placeholder="Nome" className="input input-bordered w-full"
                         value={formUser.nome} onChange={handleChange} required autoFocus />
                     </div>
                     <div className="form-control">
@@ -65,11 +66,17 @@ function ModalAddUser({ onCadastro }) {
                         value={formUser.email} onChange={handleChange} required/>
                     </div>
                     <div className='form-control'>
-                        <select name="acesso" className='select select-bordered w-full' 
-                        value={formUser.acesso} onChange={handleChange} required>
-                            <option value="" disabled>Selecione o tipo de acesso</option>
-                            <option value="Armadilha de Pragas">Armadilha de Pragas</option>
-                            <option value="Irrigação de Arroz">Irrigação de Arroz</option>
+                        <select name="platform_role" className='select select-bordered w-full' 
+                        value={formUser.platform_role} onChange={handleChange} required>
+                            <option value="STANDARD">Padrão</option>
+                            <option value="ADMIN">Administrador</option>
+                        </select>
+                    </div>
+                    <div className='form-control'>
+                        <select name="tenant_role" className='select select-bordered w-full' 
+                        value={formUser.tenant_role} onChange={handleChange} required>
+                            <option value="USER">Usuário</option>
+                            <option value="MANAGER">Gerente</option>
                         </select>
                     </div>
                 </div>
@@ -87,5 +94,3 @@ function ModalAddUser({ onCadastro }) {
     </>
     )
 }
-
-export default ModalAddUser
