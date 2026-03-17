@@ -1,7 +1,7 @@
 import Dashboard from './Dashboard'
 import Usuarios from './Usuarios';
 
-function Sidebar() {
+export default function Navbar() {
     return (
     <>
     <div className="tabs tabs-lift">
@@ -14,5 +14,3 @@ function Sidebar() {
     </>
     )
 }
-
-export default Sidebar

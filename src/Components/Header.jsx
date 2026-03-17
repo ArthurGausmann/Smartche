@@ -1,10 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
 import logo from "../assets/folha_logo.png"
 
-function Header() {
+export default function Header() {
     const location = useLocation()
 
-    const hideLoginBtn = location.pathname === '/cadastro' || location.pathname.startsWith('/login');
+    const hideLoginBtn = location.pathname === '/cadastro' 
+        || location.pathname.startsWith('/login') 
+        || location.pathname.startsWith('/dashboard') 
+        || location.pathname.startsWith('/admin');
 
     return (
     <>
@@ -21,5 +24,3 @@ function Header() {
     </>
     )
 }
-
-export default Header
