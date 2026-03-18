@@ -16,7 +16,7 @@ export default function ModalAddUser({ onCadastro }) {
     const handleClose = () => {
         setIsOpen(false);
         setFormUser({
-            nome:'',
+            name:'',
             email:'',
             platform_role: 'STANDARD',
             tenant_role: 'USER',
@@ -59,7 +59,7 @@ export default function ModalAddUser({ onCadastro }) {
                 <div className="space-y-4 mb-6">
                     <div className="form-control">
                         <input type="text" name="name" placeholder="Nome" className="input input-bordered w-full"
-                        value={formUser.nome} onChange={handleChange} required autoFocus />
+                        value={formUser.name} onChange={handleChange} required autoFocus />
                     </div>
                     <div className="form-control">
                         <input type="email" name="email" placeholder="Email" className="input input-bordered w-full" 

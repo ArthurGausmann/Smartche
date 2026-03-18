@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { usersMock } from '../mocks/usersMock'
+import { authService } from '../services/authService'
+import { userService } from '../services/userService'
 import ModalAddUser from '../Components/ModalAddUser'
 import ModalUserConfig from './ModalUserConfig'
 
@@ -7,8 +10,23 @@ export default function Usuarios() {
     const [usuarioEditando, setUsuarioEditando] = useState(null)
     const [modalAberto, setModalAberto] = useState(false)
 
+    useEffect(() => {
+        const userLogado = authService.getUser()
+        if (!userLogado) return
+
+        const todosUsuarios = userService.getUsers()
+
+        const filtrados = todosUsuarios.filter(
+            u => u.tenant.tenant_id === userLogado.tenant.tenant_id
+        )
+        setUsuarios(filtrados)
+    }, [])
+
     // Adicionar usuário
     const handleCadastro = (novoUsuario) => {
+        const userLogado = authService.getUser()
+        const todosUsuarios = userService.getUsers()
+
         const novoId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
 
         const usuario = {
@@ -19,12 +37,16 @@ export default function Usuarios() {
             platform_role: novoUsuario.platform_role,
             is_active: true,
             tenant: {
-                tenant_id: 1,
+                tenant_id: userLogado.tenant.tenant_id,
                 tenant_role: novoUsuario.tenant_role
             }
         };
 
-        setUsuarios(prev => [...prev, usuario])
+        const atualizados = userService.addUser(usuario)
+        const filtrados = atualizados.filter(
+            u => u.tenant.tenant_id === userLogado.tenant.tenant_id
+        )
+        setUsuarios(filtrados)
         console.log('Adicionado usuário: ', novoId);
     }
 
@@ -55,10 +77,12 @@ export default function Usuarios() {
     // Função para excluir um usuário
     const handleExcluirUsuario = (id) => {
         console.log('Excluindo usuário:', id);
-        // Remove o usuário da lista
-        setUsuarios(prevUsuarios => 
-            prevUsuarios.filter(usuario => usuario.id !== id)
+        const atualizados = userService.deleteUser(id)
+        const userLogado = authService.getUser()
+        const filtrados = atualizados.filter(
+            u => u.tenant.tenant_id === userLogado.tenant.tenant_id
         )
+        setUsuarios(filtrados)
     }
 
     return (

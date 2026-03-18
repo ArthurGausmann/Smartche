@@ -96,27 +96,35 @@ export default function ModalUserConfig({ usuario, onEditar, onExcluir, onClose 
                         </div>
                     </div>
 
-                    <div className="flex justify-between items-center">
-                        <div>
+                    <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-4">
+                        <div className="min-w-[220px]">
                             {excluirConfirmado ? (
                                 <div className="flex gap-2">
-                                    <button type="button" className="btn btn-error" onClick={handleExcluir} >
-                                        Confirmar Exclusão
+                                    <button  type="button"  className="btn btn-error btn-sm whitespace-nowrap" onClick={handleExcluir} >
+                                        Confirmar
                                     </button>
-                                    <button type="button" className="btn btn-ghost" onClick={handleCancelarExcluir}>Cancelar</button>
+                                    <button type="button" className="btn btn-ghost btn-sm"onClick={handleCancelarExcluir}>
+                                        Cancelar
+                                    </button>
                                 </div>
                             ) : (
-                                <button type="button" className="btn btn-outline btn-error" onClick={handleExcluir}>Excluir Usuário</button>
+                                <button type="button" className="btn btn-outline btn-error btn-sm w-full sm:w-auto"onClick={handleExcluir}>
+                                    Excluir Usuário
+                                </button>
                             )}
                         </div>
 
-                        <div className="flex gap-3">
-                            <button type="button" className="btn btn-outline" onClick={onClose}>Cancelar</button>
-                            <button type="submit" className="btn btn-primary" disabled={
-                                novoPlatformRole === usuario.platform_role && 
-                                novoTenantRole === usuario?.tenant?.tenant_role && 
-                                novoStatus === usuario.is_active}>
-                                    Salvar Alterações
+                        <div className="flex gap-3 justify-end">
+                            <button type="button" className="btn btn-outline"onClick={onClose}>
+                                Cancelar
+                            </button>
+
+                            <button type="submit" className="btn btn-primary"disabled={ 
+                                    novoPlatformRole === usuario.platform_role && 
+                                    novoTenantRole === usuario?.tenant?.tenant_role && 
+                                    novoStatus === usuario.is_active 
+                                }>
+                                Salvar Alterações
                             </button>
                         </div>
                     </div>
