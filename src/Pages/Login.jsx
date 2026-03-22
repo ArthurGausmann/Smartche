@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { authService } from "../services/authService.js"
-import toast, { Toaster } from "react-hot-toast"
+// import toast, { Toaster } from "react-hot-toast"
 
 export default function Login() {
     const [email, setEmail] = useState("")
